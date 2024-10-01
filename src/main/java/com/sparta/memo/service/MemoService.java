@@ -11,8 +11,12 @@ import java.util.List;
 public class MemoService {
     private final MemoRepository memoRepository;
 
-    public MemoService(JdbcTemplate jdbcTemplate) {
-        memoRepository = new MemoRepository(jdbcTemplate);
+//    public MemoService(JdbcTemplate jdbcTemplate) {
+//        memoRepository = new MemoRepository(jdbcTemplate);
+//    }
+
+    public MemoService(MemoRepository memoRepository) {
+        this.memoRepository = memoRepository;
     }
 
     public MemoResponseDto createMemo(MemoRequestDto requestDto) {
