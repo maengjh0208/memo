@@ -4,10 +4,15 @@ import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
 import com.sparta.memo.repository.MemoRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// bean 객체로 등록
+// @Component
+// @Service: service 역할을 하는 component
+@Service
 public class MemoService {
     private final MemoRepository memoRepository;
 

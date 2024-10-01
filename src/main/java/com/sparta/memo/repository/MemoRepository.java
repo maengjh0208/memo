@@ -3,10 +3,13 @@ package com.sparta.memo.repository;
 import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +17,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+// bean 객체로 등록
+//@Component
+// Repository 역할을 하는 Component
+@Repository
 public class MemoRepository {
     private final JdbcTemplate jdbcTemplate;
 
+    // 해당 클래스가 bean 객체로 등록하게끔 되어는 있는데
+    // 객체가 만들어지려면 아래처럼 jdbcTemplate 가 주입이 되어야함.
+    // 근데 @Component 만으로는 자동적으로 주입이 안됨
+    // @Autowired가 자동적으로 주입해주는 역할을 함.
+    // 예전에는 생성자에 @Autowired를 꼭 달아줘야 했었는데 지금은 생성자가 하나만 있을 경우 생략이 가능함
+    // 하지만 생성자 여러개 있으면 @Autowired 써줘야함.
+    // 이런 주입은 생성자 주입, 필드 주입, 메서드 주입이 있는데 보통은 생성자 주입을 선호하는 편이다. 객체의 불변성을 지켜줄 수 있어서.
+    @Autowired
     public MemoRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
